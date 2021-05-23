@@ -6,6 +6,8 @@
 </head>
 <body>
 <tr th:each="car:${myCars}">
+    <td th:text="${car.getId()}"/>
+    <br>
     <td th:text="${car.getMark()}"/>
     <br>
     <td th:text="${car.getModel()}"/>
@@ -14,13 +16,25 @@
 </tr>
 
 <form th:action="@{/add-car}" th:object="${newCar}" method="post">
-
-    <p>Mark:  <input type="text" th:field="*{mark}"></p>
+    <p>Id: <input type="text" th:field="*{id}"></p>
+    <p>Mark: <input type="text" th:field="*{mark}"></p>
     <p>Model: <input type="text" th:field="*{model}"></p>
     <p><input type="submit" value="Add new car"></p>
 
 </form>
 
+<form th:action="@{/remove-car}" th:object="${newCar}" method="post">
+    <p>index : <input type="text" th:field="*{id}"></p>
+    <p><input type="submit" value="Remove"></p>
+</form>
+
+
+<form th:action="@{/update-car}" th:object="${newCar}" method="post">
+    <p>index : <input type="text" th:field="*{id}"></p>
+    <p>Mark: <input type="text" th:field="*{mark}"></p>
+    <p>Model: <input type="text" th:field="*{model}"></p>
+    <p><input type="submit" value="Update"></p>
+</form>
 
 </body>
 </html>

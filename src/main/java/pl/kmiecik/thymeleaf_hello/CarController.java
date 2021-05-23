@@ -2,9 +2,7 @@ package pl.kmiecik.thymeleaf_hello;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +12,12 @@ public class CarController {
 
     List<Car> carsList;
 
+
     public CarController() {
-        Car car1 = new Car("BMW", "i7");
-        Car car2 = new Car("Fiat", "ducato");
-        Car car3 = new Car("Polonez", "Caro");
-        Car car4 = new Car("Skoda", "Octavia");
+        Car car1 = new Car(0L, "BMW", "i7");
+        Car car2 = new Car(1L, "Fiat", "ducato");
+        Car car3 = new Car(2L, "Polonez", "Caro");
+        Car car4 = new Car(3L, "Skoda", "Octavia");
         carsList = new ArrayList<>();
         carsList.add(car1);
         carsList.add(car2);
@@ -38,4 +37,20 @@ public class CarController {
         carsList.add(car);
         return "redirect:/car";
     }
+
+
+    @PostMapping("/remove-car")
+    public String removeCar(@ModelAttribute Car car) {
+        carsList.remove(car.getId().intValue());
+        return "redirect:/car";
+    }
+
+    @PostMapping("/update-car")
+    public String updateCar(@ModelAttribute Car car) {
+        carsList.remove(car.getId().intValue());
+        carsList.add(car);
+        return "redirect:/car";
+    }
+
+
 }
